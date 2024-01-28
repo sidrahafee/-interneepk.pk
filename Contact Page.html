@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    input[type="text"], input[type="email"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+    .error {
+        color: red;
+    }
+    .success {
+        color: green;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <input type="email" id="email" name="email" placeholder="Your Email">
+        <textarea id="message" name="message" placeholder="Your Message"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="error-msg" class="error"></div>
+    <div id="success-msg" class="success"></div>
+</div>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+    var errorMsg = document.getElementById("error-msg");
+    var successMsg = document.getElementById("success-msg");
+    var isValid = true;
+
+    errorMsg.innerHTML = "";
+    successMsg.innerHTML = "";
+
+    if (name.trim() === "") {
+        errorMsg.innerHTML += "Name is required<br>";
+        isValid = false;
+    }
+
+    if (email.trim() === "") {
+        errorMsg.innerHTML += "Email is required<br>";
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        errorMsg.innerHTML += "Invalid email address<br>";
+        isValid = false;
+    }
+
+    if (message.trim() === "") {
+        errorMsg.innerHTML += "Message is required<br>";
+        isValid = false;
+    }
+
+    if (isValid) {
+        // Simulate submission (replace this with actual form submission)
+        setTimeout(function() {
+            successMsg.innerHTML = "Form submitted successfully!";
+        }, 1000);
+    }
+});
+
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+</script>
+</body>
+</html>
