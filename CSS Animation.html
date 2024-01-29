@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Animations</title>
+<style>
+    /* Button animation */
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Hover effect */
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: #f00;
+        transition: transform 0.3s ease;
+    }
+    .box:hover {
+        transform: scale(1.2);
+    }
+
+    /* Scrolling animation */
+    .scroll-animation {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .scroll-animation.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Keyframe animation */
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ccc;
+        border-top-color: #007bff;
+        border-radius: 50%;
+        animation: rotate 1s linear infinite;
+    }
+</style>
+</head>
+<body>
+
+<!-- Button animation -->
+<button class="button">Click me</button>
+
+<!-- Hover effect -->
+<div class="box"></div>
+
+<!-- Scrolling animation -->
+<div class="scroll-animation">Scrolling Animation</div>
+
+<!-- Keyframe animation -->
+<div class="spinner"></div>
+
+<script>
+    // Scrolling animation
+    window.addEventListener('scroll', function() {
+        var scrollAnimationElements = document.querySelectorAll('.scroll-animation');
+        scrollAnimationElements.forEach(function(element) {
+            if (isElementInViewport(element)) {
+                element.classList.add('visible');
+            }
+        });
+    });
+
+    function isElementInViewport(element) {
+        var rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+</script>
+
+</body>
+</html>
